@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace PassMan.Utils
@@ -101,6 +102,32 @@ namespace PassMan.Utils
             oldPassword.Clear();
             newPassword.Clear();
             confirmPassword.Clear();
+        }
+
+        /// <summary>
+        /// Toggle password visibility and change button content.
+        /// </summary>
+        /// <param name="passwordBox"></param>
+        /// <param name="textBox"></param>
+        /// <param name="button"></param>
+        public static void TogglePasswordVisibility(PasswordBox passwordBox, TextBox textBox, Button button)
+        {
+            if (passwordBox.Visibility == Visibility.Visible)
+            {
+                textBox.Text = passwordBox.Password;
+                passwordBox.Visibility = Visibility.Collapsed;
+                textBox.Visibility = Visibility.Visible;
+                button.Content = "Hide";
+                button.ToolTip = " Hide password";
+            }
+            else
+            {
+                passwordBox.Password = textBox.Text;
+                passwordBox.Visibility = Visibility.Visible;
+                textBox.Visibility = Visibility.Collapsed;
+                button.Content = "Show";
+                button.ToolTip = "Show password";
+            }
         }
     }
 }
