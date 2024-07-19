@@ -5,34 +5,176 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PassMan.Helpers"
         mc:Ignorable="d"
-        Title="AddApplications" Background="Transparent" Height="215" Width="235" Name="AddApplicationWPF"  AllowsTransparency="True" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" >
+        Title="AddApplications"
+        Background="Transparent"
+        Height="255"
+        Width="275"
+        Name="AddApplicationWPF"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen" >
 
-    <Border CornerRadius="20" Background="#FF1E1F2C" >
+    <Border  CornerRadius="20"
+             Background="#FF1E1F2C">
+        
         <Grid Background="Transparent">
-            <Border VerticalAlignment="Top" Height="40" Background="#80000000" CornerRadius="20 20 0 0">
-                <Grid VerticalAlignment="Top" Height="40" Background="Transparent" >
-                <TextBlock Text="Add Applications" Name="titleTxt" TextAlignment="Center" HorizontalAlignment="Center" Foreground="green" FontSize="18" Margin="30,6,22,4" Width="181" RenderTransformOrigin="0.5,0.5"/>
-                <Button Content=" X " ToolTip="Close" HorizontalAlignment="Left" Margin="212,0,0,0" VerticalAlignment="Top"  Foreground="White" FontSize="10" FontWeight="Bold" Height="25" Click="closeBtn_Click" Width="20" Background="Transparent" Style="{StaticResource CustomButton}"/>
-            </Grid>
+            <Border VerticalAlignment="Top" 
+                    Height="40" 
+                    Background="#80000000" 
+                    CornerRadius="20 20 0 0">
+                
+                <Grid VerticalAlignment="Top"
+                      Height="40" 
+                      Background="Transparent">
+                    
+                    <TextBlock Text="Add Applications" 
+                               Name="titleTxt" 
+                               TextAlignment="Center" 
+                               HorizontalAlignment="Center" 
+                               Foreground="green" 
+                               FontSize="18" 
+                               Margin="30,6,22,4" 
+                               Width="181" 
+                               RenderTransformOrigin="0.5,0.5"/>
+
+                    <Button Content=" X " 
+                            ToolTip="Close" 
+                            HorizontalAlignment="Left" 
+                            Margin="255,0,0,0" 
+                            VerticalAlignment="Top"  
+                            Foreground="White" 
+                            FontSize="10" 
+                            FontWeight="Bold"
+                            Height="25"
+                            Click="closeBtn_Click"
+                            Width="20" 
+                            Background="Transparent"
+                            Style="{StaticResource CustomButton}"/>
+                </Grid>
             </Border>
 
-            <TextBox Background="#80000000" BorderThickness="0,0,0,1" BorderBrush="white" Foreground="white" FontSize="14" VerticalContentAlignment="Center"  TextAlignment="Left" x:Name="appNameTXT" HorizontalAlignment="Left" Height="30" Margin="28,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" TextChanged="appNameTXT_TextChanged" Style="{StaticResource TextboxWatermark}" Tag="Application Name" />
+            <TextBox Background="#80000000"
+                     BorderThickness="0,0,0,1"
+                     BorderBrush="white"
+                     Foreground="white"
+                     FontSize="14"
+                     VerticalContentAlignment="Center" 
+                     TextAlignment="Left"
+                     x:Name="appNameTXT"
+                     HorizontalAlignment="Center"
+                     Height="30"
+                     Margin="0,57,0,0"
+                     TextWrapping="NoWrap"
+                     VerticalAlignment="Top" 
+                     Width="200"
+                     TextChanged="appNameTXT_TextChanged"
+                     Style="{StaticResource TextboxWatermark}"
+                     Tag="Application Name" />
 
-            <TextBox Background="#80000000" BorderThickness="0,0,0,1" BorderBrush="white" Foreground="white" FontSize="14" VerticalContentAlignment="Center" TextAlignment="Left" x:Name="accountNameTXT" HorizontalAlignment="Left" Height="30" Margin="28,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" TextChanged="accountNameTXT_TextChanged" Style="{StaticResource TextboxWatermark}" Tag="Account Name"/>
+            <TextBox Background="#80000000"
+                     BorderThickness="0,0,0,1"
+                     BorderBrush="white" 
+                     Foreground="white" 
+                     FontSize="14" 
+                     VerticalContentAlignment="Center" 
+                     TextAlignment="Left"
+                     x:Name="accountNameTXT"
+                     HorizontalAlignment="Center"
+                     Height="30"
+                     Margin="0,91,0,0"
+                     TextWrapping="NoWrap"
+                     VerticalAlignment="Top"
+                     Width="200"
+                     TextChanged="accountNameTXT_TextChanged"
+                     Style="{StaticResource TextboxWatermark}" 
+                     Tag="Account Name"/>
 
-            <TextBox Background="#80000000" BorderThickness="0,0,0,1" BorderBrush="white" Foreground="white" FontSize="12" Visibility="Hidden" Tag ="Account Password" VerticalContentAlignment="Center" TextAlignment="Center" x:Name="PasswordShow" HorizontalAlignment="Left" Height="30" Margin="28,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" TextChanged="accountNameTXT_TextChanged" Style="{StaticResource TextboxWatermark}"/>
+            <TextBox Background="#80000000"
+                     BorderThickness="0,0,0,1" 
+                     BorderBrush="white" 
+                     Foreground="white"
+                     FontSize="12"
+                     Visibility="Hidden"
+                     Tag ="Account Password"
+                     VerticalContentAlignment="Center"
+                     TextAlignment="Center" 
+                     x:Name="PasswordShow"
+                     HorizontalAlignment="Left"
+                     Height="30"
+                     Margin="28,126,0,0"
+                     TextWrapping="NoWrap"
+                     VerticalAlignment="Top"
+                     Width="200"
+                     TextChanged="accountNameTXT_TextChanged"
+                     Style="{StaticResource TextboxWatermark}"/>
 
-            <Button Name="GeneratePassAcc" ToolTip="Generate Password" Foreground="White" Background="Transparent" Content="Gen" FontSize="10" Margin="0,131,210,0" Width="25" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.556,-0.722" Click="GeneratePassAcc_Click" Style="{StaticResource CustomButton}" />
+            <Button Name="GeneratePassAcc"
+                    ToolTip="Generate Password" 
+                    Foreground="White"
+                    Background="Transparent"
+                    Content="Generate"
+                    FontSize="10" 
+                    Margin="39,161,192,0"
+                    Width="NaN" 
+                    Height="14"
+                    VerticalAlignment="Top" 
+                    RenderTransformOrigin="0.556,-0.722"
+                    Click="GeneratePassAcc_Click"
+                    Style="{StaticResource CustomButton}" />
 
-            <Button Name="ShowPassword" ToolTip="Show Password (Right Click)"  Foreground="white" Content="Show" FontSize="10"  Margin="203,131,2,0" Width="30" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.556,-0.722" PreviewMouseRightButtonDown="ShowHidePassword" PreviewMouseRightButtonUp="ShowHidePassword" Click="ShowPassword_Click" Background="Transparent" Style="{StaticResource CustomButton}"/>
+            <Button Name="ShowPassword"
+                    ToolTip="Show Password (Right Click)" 
+                    Foreground="white"
+                    Content="Show"
+                    FontSize="10"  
+                    Margin="206,161,39,0"
+                    Width="30" 
+                    Height="14" 
+                    VerticalAlignment="Top" 
+                    RenderTransformOrigin="0.556,-0.722" 
+                    PreviewMouseRightButtonDown="ShowHidePassword" 
+                    PreviewMouseRightButtonUp="ShowHidePassword" 
+                    Click="ShowPassword_Click" 
+                    Background="Transparent" 
+                    Style="{StaticResource CustomButton}"/>
 
 
-            <PasswordBox Background="#80000000" BorderThickness="0,0,0,1" BorderBrush="White"  Foreground="white" FontSize="14"    Name="accPasswordBox"  HorizontalAlignment="Left" Height="30" Margin="28,126,0,0" VerticalContentAlignment="Center"  VerticalAlignment="Top" Width="170" PasswordChanged="accPasswordBox_PasswordChanged" Style="{StaticResource PasswordboxWatermark}" Tag="Account Password" 
-                                     local:PasswordBoxHelper.Attach="True"
-local:PasswordBoxHelper.Password="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <PasswordBox Background="#80000000"
+                         BorderThickness="0,0,0,1"
+                         BorderBrush="White" 
+                         Foreground="white" 
+                         FontSize="14"   
+                         Name="accPasswordBox" 
+                         HorizontalAlignment="Center" 
+                         Height="30" 
+                         Margin="0,126,0,0"
+                         VerticalContentAlignment="Center"  
+                         VerticalAlignment="Top" 
+                         Width="200"
+                         PasswordChanged="accPasswordBox_PasswordChanged"
+                         Style="{StaticResource PasswordboxWatermark}"
+                         Tag="Account Password" 
+                         local:PasswordBoxHelper.Attach="True"
+                         local:PasswordBoxHelper.Password="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </PasswordBox>
-            <Border CornerRadius="10"  Width="94" Height="37" Margin="70,168,71,10">
-                <Button Name="addAppBTN" Style="{DynamicResource RoundCorner2}" Content="Add" Width="94" Height="37" Foreground="white" Click="addAppBTN_Click" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" IsDefault="True"/>
+            
+            <Border CornerRadius="10" 
+                    Width="94"
+                    Height="37"
+                    Margin="70,188,71,10">
+                <Button Name="addAppBTN" 
+                        Style="{DynamicResource RoundCorner2}"
+                        Content="Add"
+                        Width="94"
+                        Height="37"
+                        Foreground="white"
+                        Click="addAppBTN_Click"
+                        IsEnabled="False" 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        IsDefault="True"/>
             </Border>
 
         </Grid>
