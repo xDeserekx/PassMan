@@ -76,20 +76,23 @@ namespace PassMan.Views
             switch (gridColor)
             {
                 case "green":
-                    popGrid.Background = Brushes.Green;
+                    popGrid.Background = Brushes.Transparent;
                     titleTxt.Text = "Notification";
-                    notificationLBL.Text = messageData;
+                    titleTxt.Foreground = Brushes.Green;
+                    notificationLBL.Text = messageData;                  
                     break;
 
                 case "red":
-                    popGrid.Background = Brushes.Red;
+                    popGrid.Background = Brushes.Transparent;
                     titleTxt.Text = "ERROR";
+                    titleTxt.Foreground = Brushes.Red;
                     notificationLBL.Text = messageData;
                     break;
 
                 case "orange":
-                    popGrid.Background = Brushes.DarkOrange;
+                    popGrid.Background = Brushes.Transparent;
                     titleTxt.Text = "WARNING";
+                    titleTxt.Foreground = Brushes.DarkOrange;
                     notificationLBL.Text = messageData;
                     break;
             }
