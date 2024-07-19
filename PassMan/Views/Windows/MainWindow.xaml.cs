@@ -2,6 +2,7 @@
 using PassMan.Utils;
 using PassMan.Views;
 using PassMan.Views.VaultManagement;
+using PassManLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,6 +57,7 @@ namespace PassMan
             VaultSessionExpire.LoadExpireTime(GlobalVariables.registryPath, GlobalVariables.vaultExpireReg, "10", expirePeriodTxT);
 
         }
+
 
         /// <summary>
         /// Check application start instance and close if is already opened.
@@ -194,7 +196,7 @@ namespace PassMan
         }
 
         private void closeBTN_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             Application.Current.Shutdown();
         }
 
@@ -537,7 +539,7 @@ namespace PassMan
             VaultManagement.DeleteVaultItem(vaultList, VaultManagement.GetVaultPathFromList(vaultList));
         }
 
-        
+
 
         /// <summary>
         /// Populate listview with items form global var listview.
@@ -709,6 +711,73 @@ namespace PassMan
                 return;
             }
             ImportExport.Export(vaultList, s_passwordManagerDirectory);
+        }
+
+        private void passStrengthPWD_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            UpdatePasswordStrength(passStrengthPWD.Password);
+            if (passStrengthTXT.Visibility == Visibility.Visible)
+            {
+                passStrengthTXT.Text = passStrengthPWD.Password;
+            }
+        }
+
+        private void UpdatePasswordStrength(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                strengthProgressBar.Value = 0;
+                passStrengthLBL.Content = string.Empty;
+                passTipsStrengthLBL.Content = string.Empty;
+                passStrengthLBL.Foreground = Brushes.White;
+                strengthProgressBar.Foreground = Brushes.White;
+                return;
+            }
+            string message;
+            string tip;
+            bool isStrong = PasswordStrengthChecker.IsStrong(password, out message, out tip);
+            int score = PasswordStrengthChecker.CalculatePasswordScore(password);
+            strengthProgressBar.Value = score;
+            passStrengthLBL.Content = message;
+            passTipsStrengthLBL.Content = tip;
+
+            switch (message)
+            {
+                case "Weak":
+                    passStrengthLBL.Foreground = Brushes.Red;
+                    strengthProgressBar.Foreground = Brushes.Red;
+                    break;
+                case "Medium":
+                    passStrengthLBL.Foreground = Brushes.Orange;
+                    strengthProgressBar.Foreground = Brushes.Orange;
+                    break;
+                case "Hard":
+                    passStrengthLBL.Foreground = Brushes.Cyan;
+                    strengthProgressBar.Foreground = Brushes.Cyan;
+                    break;
+                case "Safe":
+                    passStrengthLBL.Foreground = Brushes.LightGreen;
+                    strengthProgressBar.Foreground = Brushes.LightGreen;
+                    break;
+                default:
+                    passStrengthLBL.Foreground = Brushes.White;
+                    strengthProgressBar.Foreground = Brushes.White;
+                    break;
+            }
+        }
+
+        private void ToggleButon_Click(object sender, RoutedEventArgs e)
+        {
+            Utils.TextPassBoxChanges.TogglePasswordVisibility(passStrengthPWD, passStrengthTXT, toggleButton);
+        }
+
+        private void passStrengthTXT_PasswordChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdatePasswordStrength(passStrengthTXT.Text);
+            if (passStrengthPWD.Visibility == Visibility.Visible)
+            {
+                passStrengthPWD.Password = passStrengthTXT.Text;
+            }
         }
     }
 }
