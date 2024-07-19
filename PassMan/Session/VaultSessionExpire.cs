@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using PassMan.Utils;
 
-namespace PassMan.Utils
+namespace PassMan.Views.VaultManagement
 {
     public class VaultSessionExpire
     {
@@ -18,13 +19,13 @@ namespace PassMan.Utils
         /// <param name="periodBox"></param>
         public static void LoadExpireTime(string registryPath, string key, string keyValue, TextBox periodBox)
         {
-            int expireTime = Int32.Parse(keyValue);
+            int expireTime = int.Parse(keyValue);
             try
             {
                 string value = RegistryManagement.RegKey_Read("HKEY_CURRENT_USER\\" + registryPath, key);
                 if (!string.IsNullOrEmpty(value))
                 {
-                    expireTime = Int32.Parse(value);
+                    expireTime = int.Parse(value);
                     if (expireTime >= 1)
                     {
                         periodBox.Text = value;
