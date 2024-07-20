@@ -215,6 +215,25 @@ namespace PassMan
         private void Settings_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             tabControl.SelectedIndex = 2;
+
+            try
+            {
+                string filePath = "millionpassword.txt";
+                if (File.Exists(filePath))
+                {
+                    PasswordStrengthChecker.blacklistedPasswords = new HashSet<string>(File.ReadAllLines(filePath), StringComparer.OrdinalIgnoreCase);
+                }
+                else
+                {
+                    Notification.ShowNotificationInfo("red", "The file millionpassword.txt was not found.");
+                    PasswordStrengthChecker.blacklistedPasswords = new HashSet<string>();
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification.ShowNotificationInfo("red", $"Error loading millionpassword.txt file: {ex.Message}");
+                PasswordStrengthChecker.blacklistedPasswords = new HashSet<string>();
+            }
         }
         //--------------------
 
