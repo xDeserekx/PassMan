@@ -133,7 +133,7 @@
                     PreviewMouseRightButtonUp="ShowVaultPassword" 
                     PreviewMouseMove="ShowNewVaultPassword_PreviewMouseMove"
                     PreviewMouseRightButtonDown="ShowVaultPassword"
-                    Style="{StaticResource CustomButton}" Click="ShowNewVaultPassword_Click"/>
+                    Style="{StaticResource CustomButton}"/>
 
             <PasswordBox Background="#80000000"
                          BorderThickness="0,0,0,1"

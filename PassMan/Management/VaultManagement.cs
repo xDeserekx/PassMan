@@ -22,6 +22,7 @@ namespace PassMan.Utils
         /// <param name="confirmPassword">Confirm password.</param>
         public static void CreateVault(string vaultName, string password, string confirmPassword, string vaultDirectory)
         {
+            var (isValid, message) = PasswordValidator.ValidatePassword(confirmPassword);
             try
             {
                 string pathToVault = Path.Combine(vaultDirectory, $"{vaultName}.x");
@@ -39,9 +40,9 @@ namespace PassMan.Utils
                     return;
                 }
 
-                if (!PasswordValidator.ValidatePassword(confirmPassword))
+                if (!isValid)
                 {
-                    Notification.ShowNotificationInfo("orange", "Password must be at least 12 characters, and must include at least one upper case letter, one lower case letter, one numeric digit, one special character and no space!");
+                    Notification.ShowNotificationInfo("orange", "Password must be at least 8 characters, and must include at least one upper case letter, one lower case letter, one numeric digit, one special character and no space!");
                     GlobalVariables.vaultChecks = true;
                     return;
                 }

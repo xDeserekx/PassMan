@@ -76,7 +76,8 @@ namespace PassMan.Views
         /// <param name="e"></param>
         private void confirmBTN_Click(object sender, RoutedEventArgs e)
         {
-            if (!PasswordValidator.ValidatePassword(masterPasswordPWD.Password))
+            var (isValid, message) = PasswordValidator.ValidatePassword(masterPasswordPWD.Password);
+            if (!isValid)
             {
                 Utils.Notification.ShowNotificationInfo("orange", "Password must be at least 12 characters, and must include at least one upper case letter, one lower case letter, one numeric digit, one special character and no space!");
                 masterPasswordPWD.Clear();
@@ -116,7 +117,7 @@ namespace PassMan.Views
         }
 
         /// <summary>
-        /// Hide master password when mouse is moved over from eye icon.
+        /// Hide master password when mouse is moved over from button.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

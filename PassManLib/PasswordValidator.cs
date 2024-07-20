@@ -10,16 +10,24 @@ namespace PassManLib
 {
     public static class PasswordValidator
     {
-
         // <summary>
         /// Password complexity check: digit, upper case and lower case.
         /// </summary>
         /// <param name="password">Password string.</param>
         /// <returns>bool</returns>
-        public static bool ValidatePassword(string password)
+        public static (bool isValid, string message) ValidatePassword(string password)
         {
-            const string patternPassword = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{12,500}$";
-            return !(string.IsNullOrEmpty(password) || CheckSpaceChar(password) || !Regex.IsMatch(password, patternPassword) || !SpecialCharCheck(password));
+            const string patternPassword = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,500}$";
+            if (string.IsNullOrEmpty(password))
+                return (false, "Password cannot be empty.");
+            if (CheckSpaceChar(password))
+                return (false, "Password cannot contain spaces.");
+            if (!Regex.IsMatch(password, patternPassword))
+                return (false, "Password must contain at least one digit, one lower case letter, one upper case letter, and be between 8 and 500 characters long.");
+            if (!SpecialCharCheck(password))
+                return (false, "Password must contain at least one special character.");
+
+            return (true, "Password is valid.");
         }
 
         /// <summary>
@@ -58,7 +66,7 @@ namespace PassManLib
         /// </summary>
         /// <param name="input">Password string.</param>
         /// <returns></returns>
-        private static bool SpecialCharCheck(string input)
+        public static bool SpecialCharCheck(string input)
         {
             return input.IndexOfAny(@"\|!#$%&/()=?»«@£§€{}.-;'<>_,".ToCharArray()) > -1;
         }
@@ -68,7 +76,7 @@ namespace PassManLib
         /// </summary>
         /// <param name="input">Password string.</param>
         /// <returns></returns>
-        private static bool CheckSpaceChar(string input)
+        public static bool CheckSpaceChar(string input)
         {
             return input.Contains(" ");
         }
@@ -96,5 +104,7 @@ namespace PassManLib
             }
             return secureString;
         }
+
+       
     }
 }
