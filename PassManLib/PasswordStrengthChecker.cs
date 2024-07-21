@@ -11,20 +11,26 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace PassManLib
 {
+    /// <summary>
+    /// Provides functionality to check the strength of a password and verify if it is blacklisted.
+    /// </summary>
     public static class PasswordStrengthChecker
     {
+        /// <summary>
+        /// Contains a set of blacklisted passwords loaded from a file.
+        /// </summary>
         public static HashSet<string> blacklistedPasswords;
 
+        /// <summary>
+        /// Static constructor to initialize the blacklisted passwords from a file.
+        /// </summary>
         static PasswordStrengthChecker()
         {
-
                 string filePath = "millionpassword.txt";
                 if (File.Exists(filePath))
                 {
                     blacklistedPasswords = new HashSet<string>(File.ReadAllLines(filePath), StringComparer.OrdinalIgnoreCase);
                 }
-
-
         }
         private const int minPasswordLength = 8;
         private static int upperCaseCount = 0;
@@ -36,24 +42,26 @@ namespace PassManLib
         private static int onlyNumberPenalty = 0;
         private static int score = 0;
 
-        
+
 
         /// <summary>
-        /// Checks if the password is blacklisted.
+        /// Checks if the given password is blacklisted.
         /// </summary>
         /// <param name="password">Password string.</param>
-        /// <returns>bool</returns>
+        /// <returns>True if the password is blacklisted; otherwise, false.</returns>
+
         private static bool IsBlacklistedPassword(string password)
         {
             return blacklistedPasswords != null && blacklistedPasswords.Contains(password);
         }
 
         /// <summary>
-        /// Checks if the password is strong and provides a message if it's not.
+        /// Determines whether the specified password is strong.
         /// </summary>
-        /// <param name="password">Password string.</param>
-        /// <param name="message">Output message describing the issue.</param>
-        /// <returns>bool indicating if the password is strong.</returns>
+        /// <param name="password">The password string to check.</param>
+        /// <param name="message">Output message describing the strength of the password.</param>
+        /// <param name="tip">Output message providing a tip if the password is not strong.</param>
+        /// <returns>True if the password is strong; otherwise, false.</returns>
         public static bool IsStrong(string password, out string message, out string tip)
         {
             message = string.Empty;
@@ -88,6 +96,11 @@ namespace PassManLib
 
         }
 
+        /// <summary>
+        /// Calculates the score of the specified password based on various criteria.
+        /// </summary>
+        /// <param name="password">The password string to score.</param>
+        /// <returns>The score of the password.</returns>
         public static int CalculatePasswordScore(string password)
         {
             int upperCaseCount = 0;

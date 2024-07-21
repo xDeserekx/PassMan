@@ -722,6 +722,12 @@ namespace PassMan
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the ExportVault button.
+        /// Exports the vault if it is not open.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The RoutedEventArgs that contains the event data.</param>
         private void ExportVault_Click(object sender, RoutedEventArgs e)
         {
             if (GlobalVariables.vaultOpen)
@@ -732,6 +738,12 @@ namespace PassMan
             ImportExport.Export(vaultList, s_passwordManagerDirectory);
         }
 
+        /// <summary>
+        /// Handles the PasswordChanged event of the passStrengthPWD password box.
+        /// Updates the password strength display.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The RoutedEventArgs that contains the event data.</param>
         private void passStrengthPWD_PasswordChanged(object sender, RoutedEventArgs e)
         {
             UpdatePasswordStrength(passStrengthPWD.Password);
@@ -741,6 +753,10 @@ namespace PassMan
             }
         }
 
+        /// <summary>
+        /// Updates the password strength display based on the given password.
+        /// </summary>
+        /// <param name="password">The password to evaluate.</param>
         private void UpdatePasswordStrength(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
@@ -785,11 +801,23 @@ namespace PassMan
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the ToggleButton.
+        /// Toggles the visibility of the password and text box.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The RoutedEventArgs that contains the event data.</param>
         private void ToggleButon_Click(object sender, RoutedEventArgs e)
         {
             Utils.TextPassBoxChanges.TogglePasswordVisibility(passStrengthPWD, passStrengthTXT, toggleButton);
         }
 
+        /// <summary>
+        /// Handles the TextChanged event of the passStrengthTXT text box.
+        /// Updates the password strength display.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The TextChangedEventArgs that contains the event data.</param>
         private void passStrengthTXT_PasswordChanged(object sender, TextChangedEventArgs e)
         {
             UpdatePasswordStrength(passStrengthTXT.Text);
